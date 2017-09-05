@@ -37,7 +37,7 @@ public class TimePicker extends DialogFragment
         tp.setButton(TimePickerDialog.BUTTON_NEGATIVE, "PERUUTA", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == DialogInterface.BUTTON_NEGATIVE) {
-                    mSuccessCallback.invoke(0, 0);
+                    mSuccessCallback.invoke(null);
                     isCalled = true;
                 }
             }
