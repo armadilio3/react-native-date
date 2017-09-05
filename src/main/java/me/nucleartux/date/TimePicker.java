@@ -31,10 +31,12 @@ public class TimePicker extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         int hour = mInitialDate.get(Calendar.HOUR_OF_DAY);
         int minute = mInitialDate.get(Calendar.MINUTE);
-
         // Create a new instance of TimePickerDialog and return it
-        return new TimePickerDialog(getActivity(), this, hour, minute,
-                DateFormat.is24HourFormat(getActivity()));
+        TimePickerDialog tp = new TimePickerDialog(getActivity(), this, hour, minute,true);
+        tp.setButton(TimePickerDialog.BUTTON_NEGATIVE, "PERUUTA", tp);
+        tp.setButton(TimePickerDialog.BUTTON_POSITIVE, "OK", tp);
+
+        return tp;
     }
 
     @Override
