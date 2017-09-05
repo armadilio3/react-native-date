@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.app.DialogFragment;
 import android.text.format.DateFormat;
+import android.content.DialogInterface;
 
 import com.facebook.react.bridge.Callback;
 
@@ -31,9 +32,16 @@ public class TimePicker extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         int hour = mInitialDate.get(Calendar.HOUR_OF_DAY);
         int minute = mInitialDate.get(Calendar.MINUTE);
-        // Create a new instance of TimePickerDialog and return it
+        // Create a new instance of TimePickerDialog
         TimePickerDialog tp = new TimePickerDialog(getActivity(), this, hour, minute,true);
-        tp.setButton(TimePickerDialog.BUTTON_NEGATIVE, "PERUUTA", tp);
+        tp.setButton(TimePickerDialog.BUTTON_NEGATIVE, "PERUUTA", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    mSuccessCallback.invoke(0, 0);
+                    isCalled = true;
+                }
+            }
+        });
         tp.setButton(TimePickerDialog.BUTTON_POSITIVE, "OK", tp);
 
         return tp;
